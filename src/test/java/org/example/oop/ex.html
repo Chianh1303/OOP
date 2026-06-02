@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Cơ Bản - Giai Đoạn 1</title>
+</head>
+<body>
+
+        <h2>Bài 1: Tính tổng & Điểm trung bình 3 môn</h2>
+        <div class="input-group">
+            <label>Điểm Vật Lý:</label>
+            <input type="number" id="vatLy" step="0.1" placeholder="Nhập điểm Vật lý">
+        </div>
+        <div class="input-group">
+            <label>Điểm Hóa Học:</label>
+            <input type="number" id="hoaHoc" step="0.1" placeholder="Nhập điểm Hóa học">
+        </div>
+        <div class="input-group">
+            <label>Điểm Sinh Học:</label>
+            <input type="number" id="sinhHoc" step="0.1" placeholder="Nhập điểm Sinh học">
+        </div>
+        <button onclick="tinhDiem()">Tính Kết Quả</button>
+        <div class="result" id="ketQuaBai1" style="display: none;"></div>
+
+        <h2>Bài 2: Chuyển đổi nhiệt độ</h2>
+        <div class="input-group">
+            <label>Nhập độ C:</label>
+            <input type="number" id="doC" step="0.1" placeholder="Ví dụ: 37">
+        </div>
+        <button onclick="chuyenNhietDo()">Chuyển Sang độ F</button>
+        <div class="result" id="ketQuaBai2" style="display: none;"></div>
+
+        <h2>Bài 3 & 4: Tính Diện tích và Chu vi Hình Tròn</h2>
+        <div class="input-group">
+            <label>Nhập bán kính (r):</label>
+            <input type="number" id="banKinh" step="0.01" placeholder="Nhập bán kính r > 0">
+        </div>
+        <button onclick="tinhHinhTron()">Tính Chu vi & Diện tích</button>
+        <div class="result" id="ketQuaHinhTron" style="display: none;"></div>
+
+
+<script>
+    // Logic Bài 1
+    function tinhDiem() {
+        const ly = parseFloat(document.getElementById('vatLy').value);
+        const hoa = parseFloat(document.getElementById('hoaHoc').value);
+        const sinh = parseFloat(document.getElementById('sinhHoc').value);
+
+        if (isNaN(ly) || isNaN(hoa) || isNaN(sinh)) {
+            alert("Vui lòng điền đầy đủ điểm số của cả 3 môn!");
+            return;
+        }
+
+        const tong = ly + hoa + sinh;
+        const trungBinh = tong / 3;
+
+        const resDiv = document.getElementById('ketQuaBai1');
+        resDiv.style.display = "block";
+        resDiv.innerHTML = `Tổng điểm: <strong>${tong.toFixed(2)}</strong> <br> Điểm trung bình: <strong>${trungBinh.toFixed(2)}</strong>`;
+    }
+
+    // Logic Bài 2
+    function chuyenNhietDo() {
+        const doC = parseFloat(document.getElementById('doC').value);
+
+        if (isNaN(doC)) {
+            alert("Vui lòng nhập giá trị độ C!");
+            return;
+        }
+
+        // Công thức: F = (C * 9/5) + 32
+        const doF = (doC * 9 / 5) + 32;
+
+        const resDiv = document.getElementById('ketQuaBai2');
+        resDiv.style.display = "block";
+        resDiv.innerHTML = `${doC}°C tương đương với <strong>${doF.toFixed(1)}°F</strong>`;
+    }
+
+    // Logic Bài 3 & Bài 4
+    function tinhHinhTron() {
+        const r = parseFloat(document.getElementById('banKinh').value);
+
+        if (isNaN(r) || r <= 0) {
+            alert("Bán kính phải là một số lớn hơn 0!");
+            return;
+        }
+
+        // Tương đương Math.PI trong Java, JS sử dụng Math.PI
+        const chuVi = 2 * Math.PI * r;
+        const dienTich = Math.PI * Math.pow(r, 2);
+
+        const resDiv = document.getElementById('ketQuaHinhTron');
+        resDiv.style.display = "block";
+        resDiv.innerHTML = `Chu vi hình tròn: <strong>${chuVi.toFixed(4)}</strong> <br> Diện tích hình tròn: <strong>${dienTich.toFixed(4)}</strong>`;
+    }
+</script>
+
+</body>
+</html>
