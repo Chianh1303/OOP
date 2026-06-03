@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Máy tính bỏ túi đơn giản</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; margin-top: 50px; }
+        .calculator { border: 2px solid #333; padding: 20px; border-radius: 10px; background-color: #f9f9f9; width: 220px; }
+        #screen { width: 100%; height: 40px; font-size: 1.2rem; text-align: right; margin-bottom: 15px; padding: 5px; box-sizing: border-box; }
+        .buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        button { padding: 15px; font-size: 1rem; cursor: pointer; font-weight: bold; border-radius: 5px; border: 1px solid #ccc; }
+        button.operator { background-color: #f39c12; color: white; }
+        button.equal { background-color: #2ecc71; color: white; grid-column: span 2; }
+        button.clear { background-color: #e74c3c; color: white; grid-column: span 2; }
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <input type="text" id="screen" readonly value="0">
+
+    <div class="buttons">
+        <button class="clear" onclick="xoaMayTinh()">C</button>
+        <button class="operator" onclick="chonPhepTinh('/')">/</button>
+        <button class="operator" onclick="chonPhepTinh('*')">x</button>
+
+        <button onclick="bamSo('7')">7</button>
+        <button onclick="bamSo('8')">8</button>
+        <button onclick="bamSo('9')">9</button>
+        <button class="operator" onclick="chonPhepTinh('-')">-</button>
+
+        <button onclick="bamSo('4')">4</button>
+        <button onclick="bamSo('5')">5</button>
+        <button onclick="bamSo('6')">6</button>
+        <button class="operator" onclick="chonPhepTinh('+')">+</button>
+
+        <button onclick="bamSo('1')">1</button>
+        <button onclick="bamSo('2')">2</button>
+        <button onclick="bamSo('3')">3</button>
+
+        <button onclick="bamSo('0')">0</button>
+        <button class="equal" onclick="thucHienTinhToan()">=</button>
+    </div>
+</div>
+
+</body>
+<script>
+    // Khai báo các biến bộ nhớ toàn cục để lưu trữ trạng thái tính toán
+    let soThuNhat = "";
+    let phepTinh = "";
+    let soThuHai = "";
+    let dangNhapSoThuHai = false; // Biến cờ hiệu để biết khi nào chuyển sang nhập số thứ hai
+
+    const manHinh = document.getElementById("screen");
+
+    // 1. Hàm xử lý khi người dùng nhấn vào button số
+    function bamSo(so) {
+        if (dangNhapSoThuHai === false) {
+            // Đang nhập cho số thứ nhất
+            soThuNhat += so;
+            manHinh.value = soThuNhat;
+        } else {
+            // Đang nhập cho số thứ hai (sau khi đã chọn phép tính)
+            soThuHai += so;
+            manHinh.value = soThuHai;
+        }
+    }
+
+    // 2. Hàm xử lý khi người dùng nhấn vào button phép tính
+    function chonPhepTinh(dauPhepTinh) {
+        if (soThuNhat !== "") {
+            phepTinh = dauPhepTinh;
+            dangNhapSoThuHai = true; // Kích hoạt cờ hiệu để số bấm tiếp theo nhảy vào số thứ hai
+        }
+    }
+
+    // 3. Hàm xử lý khi người dùng nhấn vào button “=” để hiển thị kết quả
+    function thucHienTinhToan() {
+        // Kiểm tra xem đã nhập đủ số thứ nhất, phép tính và số thứ hai chưa
+        if (soThuNhat === "" || phepTinh === "" || soThuHai === "") {
+            return;
+        }
+
+        // Ép kiểu chuỗi nhập từ nút bấm sang số thực để tính toán
+        const num1 = parseFloat(soThuNhat);
+        const num2 = parseFloat(soThuHai);
+        let ketQua = 0;
+
+        // Sử dụng cấu trúc rẽ nhánh switch-case tương tự như Java Core
+        switch (phepTinh) {
+            case '+':
+                ketQua = num1 + num2;
+                break;
+            case '-':
+                ketQua = num1 - num2;
+                break;
+            case '*':
+                ketQua = num1 * num2;
+                break;
+            case '/':
+                if (num2 === 0) {
+                    ketQua = "Lỗi (Chia cho 0)";
+                } else {
+                    ketQua = num1 / num2;
+                }
+                break;
+        }
+
+        // Hiển thị kết quả lên màn hình máy tính
+        manHinh.value = ketQua;
+
+        // Reset lại bộ nhớ để sẵn sàng cho lượt tính toán mới
+        soThuNhat = ketQua.toString(); // Giữ lại kết quả cũ làm số thứ nhất nếu người dùng muốn tính tiếp
+        soThuHai = "";
+        phepTinh = "";
+        dangNhapSoThuHai = false;
+    }
+
+    // Hàm bổ trợ để xóa sạch (Clear) trạng thái máy tính về ban đầu
+    function xoaMayTinh() {
+        soThuNhat = "";
+        phepTinh = "";
+        soThuHai = "";
+        dangNhapSoThuHai = false;
+        manHinh.value = "0";
+    }
+</script>
+</html>
