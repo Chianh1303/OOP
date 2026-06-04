@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tính số ngày trong tháng</title>
+</head>
+<body>
+
+<h1>Tính số ngày</h1>
+<label>Nhập tháng</label>
+<input type="text" id="month">
+
+<button type="button" onclick="tinhSoNgay()">Tính số ngày</button>
+
+<div id="ketqua" style="margin-top: 15px; font-weight: bold;"></div>
+
+</body>
+<script>
+    function tinhSoNgay() {
+        const month = parseInt(document.getElementById("month").value);
+        let result = "";
+
+        switch (month) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                result = "Tháng " + month + " có 31 ngày.";
+                break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                result = "Tháng " + month + " có 30 ngày.";
+                break;
+            case 2:
+                result = "Tháng 2 có 28 hoặc 29 ngày (tùy thuộc vào năm nhuận).";
+                break;
+            default:
+                result = "Số tháng nhập vào không hợp lệ! Vui lòng nhập số từ 1 đến 12.";
+                break;
+        }
+
+        document.getElementById("ketqua").innerHTML = result;
+    }
+</script>
+</html>
