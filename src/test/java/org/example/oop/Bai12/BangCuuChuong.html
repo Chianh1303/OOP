@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tạo bảng bằng vòng lặp lồng nhau</title>
+</head>
+<body>
+
+<h1>Tạo bảng tự động</h1>
+
+<label>Nhập số dòng:</label>
+<input type="number" id="rowInput" value="5">
+<br><br>
+
+<label>Nhập số cột:</label>
+<input type="number" id="colInput" value="5">
+<br><br>
+
+<button type="button" onclick="taoBang()">Tạo bảng</button>
+<br><br>
+
+<div id="container-table"></div>
+
+</body>
+<script>
+  function taoBang() {
+    const soDong = parseInt(document.getElementById("rowInput").value);
+    const soCot = parseInt(document.getElementById("colInput").value);
+
+    let htmlTable = "<table border='1'>";
+
+    for (let i = 1; i <= soDong; i++) {
+      htmlTable += "<tr>";
+
+      for (let j = 1; j <= soCot; j++) {
+        htmlTable += "<td>" + (i * j) + "</td>";
+      }
+
+      htmlTable += "</tr>";
+    }
+
+    htmlTable += "</table>";
+
+    document.getElementById("container-table").innerHTML = htmlTable;
+  }
+</script>
+</html>
