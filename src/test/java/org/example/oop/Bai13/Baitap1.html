@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>In số nguyên tố</title>
+</head>
+<body>
+
+<h1>In dãy số nguyên tố</h1>
+
+<label>Nhập số lượng số nguyên tố cần in:</label>
+<input type="number" id="numbersInput" value="20">
+<button type="button" onclick="inSoNguyenTo()">In kết quả</button>
+<br><br>
+
+<div id="ketqua"></div>
+
+</body>
+<script>
+    function inSoNguyenTo() {
+        const numbers = parseInt(document.getElementById("numbersInput").value);
+
+        if (isNaN(numbers) || numbers <= 0) {
+            document.getElementById("ketqua").innerHTML = "Vui lòng nhập một số nguyên lớn hơn 0!";
+            return;
+        }
+
+        let count = 0;
+
+        let N = 2;
+
+        let chuoiKetQua = "";
+
+        while (count < numbers) {
+
+            let laSoNguyenTo = true;
+            for (let i = 2; i <= Math.sqrt(N); i++) {
+                if (N % i === 0) {
+                    laSoNguyenTo = false;
+                    break;
+                }
+            }
+
+            if (laSoNguyenTo === true) {
+                chuoiKetQua += N + " ";
+                count++;
+            }
+
+            N++;
+        }
+
+        document.getElementById("ketqua").innerHTML = "Dãy số nguyên tố tìm được là: " + chuoiKetQua;
+    }
+</script>
+</html>

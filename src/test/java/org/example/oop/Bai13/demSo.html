@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Đếm số từ 1 -100</h1>
+<button type="button" onclick="demSo()">Bat dau dem</button>
+<br><br>
+<div id="ketqua"></div>
+</body>
+<script>
+    function demSo() {
+        
+
+    let chuoiSo ="";
+    for (let i=0;i<100;i++){
+        chuoiSo+= i+"";
+        if (i == 99){
+            alert("hoan thanh")
+        }
+    }
+        document.getElementById("ketqua").innerHTML="Dãy số" +chuoiSo;
+
+    }
+</script>
+</html>
