@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    function Bai1() {
+
+
+        let myColor = ["Red", "Green", "White", "Black"];
+        let result = "";
+        for (let i = 0; i < myColor.length; i++) {
+            result += myColor[i];
+            if (i < myColor.length - 1) {
+                result += "";
+            }
+
+        }
+        console.log(result)
+    }
+    function bai2() {
+        let str = "025468";
+        let result = str[0];
+
+        for (let i = 1; i < str.length; i++) {
+            if (parseInt(str[i - 1]) % 2 === 0 && parseInt(str[i]) % 2 === 0) {
+                result += "-";
+            }
+            result += str[i];
+        }
+
+        console.log(result);
+    }
+    function bai3(){
+        let str = "The Quick Brown Fox";
+        let result = "";
+
+        for (let i = 0; i < str.length; i++) {
+            let ch = str[i];
+
+            if (ch === ch.toUpperCase()) {
+                result += ch.toLowerCase();
+            } else {
+                result += ch.toUpperCase();
+            }
+        }
+
+        console.log(result);
+    }
+</script>
+
+</html>
