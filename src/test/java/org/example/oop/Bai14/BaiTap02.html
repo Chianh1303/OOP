@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h2>Từ điển</h2>
+
+<input type="text" id="englishWord" placeholder="Nhập từ tiếng Anh">
+<button onclick="translateWord()">Tìm kiếm</button>
+
+<p id="result"></p>
+
+<script>
+    let english = ["apple", "banana", "cat", "dog", "book"];
+
+    let vietnamese = ["táo", "chuối", "mèo", "chó", "sách"];
+
+    function translateWord() {
+        let word = document.getElementById("englishWord").value.toLowerCase();
+
+        let index = english.indexOf(word);
+
+        if (index !== -1) {
+            document.getElementById("result").innerHTML =
+                "Nghĩa tiếng Việt: " + vietnamese[index];
+        } else {
+            document.getElementById("result").innerHTML =
+                "Không tìm thấy";
+        }
+    }
+</script>
+</body>
+</html>
