@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    class Temperature {
+        constructor(celsius) {
+            this.setCelsius(celsius);
+        }
+
+        setCelsius(celsius) {
+            if (celsius < -273) {
+                console.error("Nhiệt độ không được thấp hơn -273°C (Độ không tuyệt đối).");
+                this.celsius = -273; // Giới hạn về mức thấp nhất
+            } else {
+                this.celsius = celsius;
+            }
+        }
+
+        // Chuyển đổi sang Fahrenheit: F = C * 1.8 + 32
+        toFahrenheit() {
+            return (this.celsius * 1.8) + 32;
+        }
+
+        // Chuyển đổi sang Kelvin: K = C + 273.15
+        toKelvin() {
+            return this.celsius + 273.15;
+        }
+
+    }
+    // 1. Khởi tạo đối tượng
+    const myTemp = new Temperature(25);
+
+    // 2. Gán giá trị 25°C (đã thực hiện trong constructor)
+    // Hoặc có thể dùng: myTemp.setCelsius(25);
+
+    // 3. Hiển thị kết quả
+    console.log(`Nhiệt độ hiện tại: ${myTemp.celsius}°C`);
+    console.log(`Tương ứng độ Fahrenheit: ${myTemp.toFahrenheit()}°F`);
+    console.log(`Tương ứng độ Kelvin: ${myTemp.toKelvin()}K`);
+</script>
+</body>
+</html>
