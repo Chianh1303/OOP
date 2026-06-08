@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    class Mobile {
+        constructor(name) {
+            this.name = name;
+            this.battery = 100;
+            this.isON = false;
+            this.draft = "";
+            this.inbox = [];
+            this.sent = [];
+        }
+
+        checkStatus() {
+            return this.isON;
+        }
+
+        togglePower() {
+            this.isON = !this.isON;
+            this.reduceBattery();
+        }
+
+        chargeBattery() {
+            if (this.battery < 100) this.battery++;
+        }
+
+        reduceBattery() {
+            if (this.battery > 0) this.battery--;
+            if (this.battery === 0) this.isON = false;
+        }
+
+        writeMessage(text) {
+            if (!this.isON) return;
+            this.draft = text;
+            this.reduceBattery();
+        }
+
+        sendMessage(targetMobile) {
+            if (!this.isON) return;
+            targetMobile.receiveMessage(this.draft);
+            this.sent.push(this.draft);
+            this.draft = "";
+            this.reduceBattery();
+        }
+
+        receiveMessage(message) {
+            this.inbox.push(message);
+            this.reduceBattery();
+        }
+
+        viewInbox() {
+            if (!this.isON) return;
+            this.reduceBattery();
+            return this.inbox;
+        }
+
+        viewSent() {
+            if (!this.isON) return;
+            this.reduceBattery();
+            return this.sent;
+        }
+    }
+    // Khởi tạo hai đối tượng
+    let nokia = new Mobile("Nokia");
+    let iphone = new Mobile("iPhone");
+
+    // Bật điện thoại
+    nokia.togglePower();
+    iphone.togglePower();
+
+    // Nokia soạn và gửi tin nhắn cho iPhone
+    nokia.writeMessage("Chào iPhone, mình là Nokia đây!");
+    nokia.sendMessage(iphone);
+
+    // iPhone xem hộp thư đến
+    console.log("Hộp thư đến của iPhone:", iphone.viewInbox());
+</script>
+
+<body>
+
+</body>
+</html>
