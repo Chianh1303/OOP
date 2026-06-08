@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="400" height="300" style="border:1px solid #000;"></canvas>
+
+<script>
+    class Rectangle {
+        constructor(length, width) {
+            this.length = length;
+            this.width = width;
+        }
+
+        // Tính diện tích
+        getArea() {
+            return this.length * this.width;
+        }
+
+        // Tính chu vi
+        getPerimeter() {
+            return (this.length + this.width) * 2;
+        }
+
+        // Vẽ lên canvas
+        draw(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) {
+                console.error("Không tìm thấy canvas với ID:", canvasId);
+                return;
+            }
+
+            const ctx = canvas.getContext('2d');
+
+            // Xóa canvas trước khi vẽ mới
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Thiết lập kiểu vẽ
+            ctx.fillStyle = 'skyblue';
+            ctx.strokeStyle = 'blue';
+            ctx.lineWidth = 2;
+
+            // Vẽ hình chữ nhật (x, y, width, height)
+            ctx.fillRect(10, 10, this.length, this.width);
+            ctx.strokeRect(10, 10, this.length, this.width);
+        }
+    }
+    const myRect = new Rectangle(200, 100);
+
+    console.log("Diện tích:", myRect.getArea());
+    console.log("Chu vi:", myRect.getPerimeter());
+
+    // Gọi hàm vẽ
+    myRect.draw('myCanvas');
+</script>
+
+
+</body>
+</html>
